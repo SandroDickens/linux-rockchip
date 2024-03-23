@@ -1,0 +1,8 @@
+--- scripts/dtc/include-prefixes/dt-bindings/clock/rk3066a-cru.h	2024-03-19 22:05:57.721640946 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/clock/rk3066a-cru.h	2024-03-23 20:32:43.836410660 +0800
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (c) 2014 MundoReader S.L.
+  * Author: Heiko Stuebner <heiko@sntech.de>

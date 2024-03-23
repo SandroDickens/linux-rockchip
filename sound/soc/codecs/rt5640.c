@@ -1335,7 +1335,9 @@ static const struct snd_soc_dapm_route rt5640_dapm_routes[] = {
 	{ "I2S2", NULL, "I2S2 Filter ASRC", is_using_asrc },
 	{ "DMIC1", NULL, "DMIC1 ASRC", is_using_asrc },
 	{ "DMIC2", NULL, "DMIC2 ASRC", is_using_asrc },
-
+	{"IN1P", NULL, "MICBIAS1"},
+	{"IN2P", NULL, "MICBIAS1"},
+	{"IN3P", NULL, "MICBIAS1"},
 	{"IN1P", NULL, "LDO2"},
 	{"IN2P", NULL, "LDO2"},
 	{"IN3P", NULL, "LDO2"},
@@ -1837,9 +1839,6 @@ static int rt5640_set_dai_sysclk(struct snd_soc_dai *dai,
 	struct rt5640_priv *rt5640 = snd_soc_component_get_drvdata(component);
 	unsigned int reg_val = 0;
 	unsigned int pll_bit = 0;
-
-	if (freq == rt5640->sysclk && clk_id == rt5640->sysclk_src)
-		return 0;
 
 	switch (clk_id) {
 	case RT5640_SCLK_S_MCLK:

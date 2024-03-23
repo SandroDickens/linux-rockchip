@@ -1,0 +1,16 @@
+--- scripts/dtc/include-prefixes/dt-bindings/clock/rk3368-cru.h	2024-03-23 21:12:52.723945452 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/clock/rk3368-cru.h	2024-03-23 20:32:43.836410660 +0800
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (c) 2015 Heiko Stuebner <heiko@sntech.de>
+  */
+@@ -101,6 +101,7 @@
+ #define ACLK_VIDEO		208
+ #define ACLK_BUS		209
+ #define ACLK_PERI		210
++#define ACLK_CCI_PRE		211
+ 
+ /* pclk gates */
+ #define PCLK_GPIO0		320

@@ -1,0 +1,12 @@
+--- scripts/dtc/include-prefixes/arm64/rockchip/rk3308-evb.dts	2024-03-23 21:12:48.740605619 +0800
++++ scripts/dtc/include-prefixes/arm64/rockchip/rk3308-evb.dts	2024-03-23 20:32:39.889777635 +0800
+@@ -196,9 +196,6 @@
+ };
+ 
+ &pinctrl {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&rtc_32k>;
+-
+ 	buttons {
+ 		pwr_key: pwr-key {
+ 			rockchip,pins = <0 RK_PA6 0 &pcfg_pull_up>;

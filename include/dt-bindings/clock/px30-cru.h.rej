@@ -1,0 +1,19 @@
+--- scripts/dtc/include-prefixes/dt-bindings/clock/px30-cru.h	2024-03-19 22:05:57.718307678 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/clock/px30-cru.h	2024-03-23 20:32:43.833077354 +0800
+@@ -87,6 +87,8 @@
+ #define SCLK_UART1_SRC		85
+ #define SCLK_SDMMC_DIV		86
+ #define SCLK_SDMMC_DIV50	87
++#define SCLK_I2S0_TX_MUX	88
++#define SCLK_I2S0_RX_MUX	89
+ 
+ /* dclk gates */
+ #define DCLK_VOPB		150
+@@ -388,4 +390,7 @@
+ #define SRST_GRF_P		186
+ #define SRST_I2S0_RX		191
+ 
++#define SRST_I2S0_RX_S		128
++#define SRST_DCF_P_S		191
++
+ #endif

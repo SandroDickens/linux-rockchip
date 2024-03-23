@@ -1,0 +1,13 @@
+--- scripts/dtc/include-prefixes/dt-bindings/memory/mt2701-larb-port.h	2024-03-23 21:12:52.727278791 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/memory/mt2701-larb-port.h	2024-03-23 20:32:43.843077269 +0800
+@@ -4,8 +4,8 @@
+  * Author: Honghui Zhang <honghui.zhang@mediatek.com>
+  */
+ 
+-#ifndef _MT2701_LARB_PORT_H_
+-#define _MT2701_LARB_PORT_H_
++#ifndef _DT_BINDINGS_MEMORY_MT2701_LARB_PORT_H_
++#define _DT_BINDINGS_MEMORY_MT2701_LARB_PORT_H_
+ 
+ /*
+  * Mediatek m4u generation 1 such as mt2701 has flat m4u port numbers,

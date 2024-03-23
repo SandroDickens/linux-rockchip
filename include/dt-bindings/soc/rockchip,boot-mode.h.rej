@@ -1,0 +1,23 @@
+--- scripts/dtc/include-prefixes/dt-bindings/soc/rockchip,boot-mode.h	2024-03-19 22:05:57.741640554 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/soc/rockchip,boot-mode.h	2024-03-23 20:32:43.853077185 +0800
+@@ -10,7 +10,19 @@
+ #define BOOT_BL_DOWNLOAD	(REBOOT_FLAG + 1)
+ /* enter recovery */
+ #define BOOT_RECOVERY		(REBOOT_FLAG + 3)
+- /* enter fastboot mode */
++/* reboot by panic */
++#define BOOT_PANIC		(REBOOT_FLAG + 7)
++/* reboot by watchdog */
++#define BOOT_WATCHDOG		(REBOOT_FLAG + 8)
++/* enter fastboot mode */
+ #define BOOT_FASTBOOT		(REBOOT_FLAG + 9)
++/* enter charging mode */
++#define BOOT_CHARGING		(REBOOT_FLAG + 11)
++/* enter usb mass storage mode */
++#define BOOT_UMS		(REBOOT_FLAG + 12)
++/* reboot system quiescent */
++#define BOOT_QUIESCENT		(REBOOT_FLAG + 14)
++/* reboot by panic and capture ramdump in uboot through usb */
++#define BOOT_WINUSB		(REBOOT_FLAG + 15)
+ 
+ #endif

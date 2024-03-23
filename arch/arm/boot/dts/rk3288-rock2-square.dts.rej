@@ -1,0 +1,10 @@
+--- scripts/dtc/include-prefixes/arm/rk3288-rock2-square.dts	2024-03-23 21:12:48.543938626 +0800
++++ scripts/dtc/include-prefixes/arm/rk3288-rock2-square.dts	2024-03-23 20:32:39.723112389 +0800
+@@ -64,6 +64,7 @@
+ 	sound {
+ 		compatible = "simple-audio-card";
+ 		simple-audio-card,name = "SPDIF";
++		simple-audio-card,mclk-fs = <128>;
+ 		simple-audio-card,dai-link@1 {  /* S/PDIF - S/PDIF */
+ 			cpu { sound-dai = <&spdif>; };
+ 			codec { sound-dai = <&spdif_out>; };

@@ -1,0 +1,11 @@
+--- scripts/dtc/include-prefixes/arm64/rockchip/rk3328-rock64.dts	2024-03-23 21:12:48.740605619 +0800
++++ scripts/dtc/include-prefixes/arm64/rockchip/rk3328-rock64.dts	2024-03-23 20:32:39.893110939 +0800
+@@ -183,7 +190,7 @@
+ 		interrupt-parent = <&gpio2>;
+ 		interrupts = <6 IRQ_TYPE_LEVEL_LOW>;
+ 		#clock-cells = <1>;
+-		clock-output-names = "xin32k", "rk805-clkout2";
++		clock-output-names = "rk805-clkout1", "rk805-clkout2";
+ 		gpio-controller;
+ 		#gpio-cells = <2>;
+ 		pinctrl-names = "default";

@@ -1,0 +1,11 @@
+--- scripts/dtc/include-prefixes/arm64/hisilicon/hi3660.dtsi	2024-03-23 21:12:48.720605586 +0800
++++ scripts/dtc/include-prefixes/arm64/hisilicon/hi3660.dtsi	2024-03-23 20:32:39.869777805 +0800
+@@ -431,7 +431,7 @@
+ 			resets = <&iomcu_rst 0x20 4>;
+ 			pinctrl-names = "default";
+ 			pinctrl-0 = <&i2c1_pmx_func &i2c1_cfg_func>;
+-			status = "disabled";
++			status = "ok";
+ 		};
+ 
+ 		i2c3: i2c@fdf0c000 {

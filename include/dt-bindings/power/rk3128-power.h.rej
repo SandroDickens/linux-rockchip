@@ -1,0 +1,8 @@
+--- scripts/dtc/include-prefixes/dt-bindings/power/rk3128-power.h	2024-03-19 22:05:57.738307286 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/power/rk3128-power.h	2024-03-23 20:32:43.846410574 +0800
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ #ifndef __DT_BINDINGS_POWER_RK3128_POWER_H__
+ #define __DT_BINDINGS_POWER_RK3128_POWER_H__
+ 

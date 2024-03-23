@@ -25,6 +25,7 @@
 *.gz
 *.i
 *.ko
+*.lds
 *.lex.c
 *.ll
 *.lst
@@ -41,6 +42,7 @@
 *.so.dbg
 *.su
 *.symtypes
+*.symversions
 *.tab.[ch]
 *.tar
 *.xz
@@ -52,6 +54,8 @@ modules.order
 #
 # Top-level generic files
 #
+/*.img
+/out/
 /tags
 /TAGS
 /linux

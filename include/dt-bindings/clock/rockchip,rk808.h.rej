@@ -1,0 +1,8 @@
+--- scripts/dtc/include-prefixes/dt-bindings/clock/rockchip,rk808.h	2024-03-19 22:05:57.724974214 +0800
++++ scripts/dtc/include-prefixes/dt-bindings/clock/rockchip,rk808.h	2024-03-23 20:32:43.839743964 +0800
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * This header provides constants clk index RK808 pmic clkout
+  */
