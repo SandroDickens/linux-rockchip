@@ -1,0 +1,26 @@
+--- drivers/usb/host/xhci.h
++++ drivers/usb/host/xhci.h
+@@ -1550,9 +1550,12 @@ struct xhci_td {
+ 	struct xhci_segment	*start_seg;
+ 	union xhci_trb		*first_trb;
+ 	union xhci_trb		*last_trb;
++	struct xhci_segment	*last_trb_seg;
+ 	struct xhci_segment	*bounce_seg;
+ 	/* actual_length of the URB has already been set */
+ 	bool			urb_length_set;
++	bool			error_mid_td;
++	unsigned int		num_trbs;
+ };
+ 
+ /* xHCI command default timeout value */
+@@ -1724,6 +1722,10 @@ struct xhci_port {
+ 	struct xhci_hub		*rhub;
+ 	struct xhci_port_cap	*port_cap;
+ 	unsigned int		lpm_incapable:1;
++	unsigned long		resume_timestamp;
++	bool			rexit_active;
++	struct completion	rexit_done;
++	struct completion	u3exit_done;
+ };
+ 
+ struct xhci_hub {

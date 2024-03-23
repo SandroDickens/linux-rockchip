@@ -1,0 +1,15 @@
+--- drivers/usb/dwc2/hcd_intr.c
++++ drivers/usb/dwc2/hcd_intr.c
+@@ -2064,11 +2066,9 @@ static void dwc2_hc_n_intr(struct dwc2_hsotg *hsotg, int chnum)
+ 			 chnum);
+ 		dev_vdbg(hsotg->dev,
+ 			 "  hcint 0x%08x, hcintmsk 0x%08x, hcint&hcintmsk 0x%08x\n",
+-			 hcint, hcintmsk, hcint & hcintmsk);
++			 hcintraw, hcintmsk, hcint);
+ 	}
+ 
+-	dwc2_writel(hsotg, hcint, HCINT(chnum));
+-
+ 	/*
+ 	 * If we got an interrupt after someone called
+ 	 * dwc2_hcd_endpoint_disable() we don't want to crash below

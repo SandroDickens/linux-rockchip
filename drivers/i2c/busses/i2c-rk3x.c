@@ -201,6 +201,7 @@ struct rk3x_i2c_soc_data {
  * @clk: function clk for rk3399 or function & Bus clks for others
  * @pclk: Bus clk for rk3399
  * @clk_rate_nb: i2c clk rate change notify
+ * @irq: irq number
  * @t: I2C known timing information
  * @lock: spinlock for the i2c bus
  * @wait: the waitqueue to wait for i2c transfer
@@ -1642,6 +1643,8 @@ static int rk3x_i2c_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "cannot request IRQ\n");
 		return ret;
 	}
+
+	i2c->irq = irq;
 
 	platform_set_drvdata(pdev, i2c);
 

@@ -1,0 +1,33 @@
+--- drivers/gpu/drm/rockchip/rockchip_drm_vop.c
++++ drivers/gpu/drm/rockchip/rockchip_drm_vop.c
+@@ -996,7 +1004,7 @@ static void vop_plane_atomic_update(struct drm_plane *plane,
+ 	VOP_WIN_SET(vop, win, dsp_info, dsp_info);
+ 	VOP_WIN_SET(vop, win, dsp_st, dsp_st);
+ 
+-	rb_swap = has_rb_swapped(fb->format->format);
++	rb_swap = has_rb_swapped(vop->data->version, fb->format->format);
+ 	VOP_WIN_SET(vop, win, rb_swap, rb_swap);
+ 
+ 	/*
+@@ -1541,7 +1549,8 @@ static struct drm_crtc_state *vop_crtc_duplicate_state(struct drm_crtc *crtc)
+ 	if (WARN_ON(!crtc->state))
+ 		return NULL;
+ 
+-	rockchip_state = kzalloc(sizeof(*rockchip_state), GFP_KERNEL);
++	rockchip_state = kmemdup(to_rockchip_crtc_state(crtc->state),
++				 sizeof(*rockchip_state), GFP_KERNEL);
+ 	if (!rockchip_state)
+ 		return NULL;
+ 
+@@ -1566,7 +1575,10 @@ static void vop_crtc_reset(struct drm_crtc *crtc)
+ 	if (crtc->state)
+ 		vop_crtc_destroy_state(crtc, crtc->state);
+ 
+-	__drm_atomic_helper_crtc_reset(crtc, &crtc_state->base);
++	if (crtc_state)
++		__drm_atomic_helper_crtc_reset(crtc, &crtc_state->base);
++	else
++		__drm_atomic_helper_crtc_reset(crtc, NULL);
+ }
+ 
+ #ifdef CONFIG_DRM_ANALOGIX_DP

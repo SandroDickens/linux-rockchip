@@ -1,0 +1,80 @@
+--- arch/arm64/kernel/traps.c
++++ arch/arm64/kernel/traps.c
+@@ -359,37 +323,64 @@ void arm64_notify_segfault(unsigned long addr)
+ 	force_signal_inject(SIGSEGV, code, addr, 0);
+ }
+ 
+-void do_undefinstr(struct pt_regs *regs)
++void do_el0_undef(struct pt_regs *regs, unsigned long esr)
+ {
++	u32 insn;
++
+ 	/* check for AArch32 breakpoint instructions */
+ 	if (!aarch32_break_handler(regs))
+ 		return;
+ 
+-	if (call_undef_hook(regs) == 0)
++	if (user_insn_read(regs, &insn))
++		goto out_err;
++
++	if (try_emulate_mrs(regs, insn))
++		return;
++
++	if (try_emulate_armv8_deprecated(regs, insn))
+ 		return;
+ 
+-	BUG_ON(!user_mode(regs));
++out_err:
+ 	force_signal_inject(SIGILL, ILL_ILLOPC, regs->pc, 0);
+ }
+-NOKPROBE_SYMBOL(do_undefinstr);
+ 
+-void do_bti(struct pt_regs *regs)
++void do_el1_undef(struct pt_regs *regs, unsigned long esr)
++{
++	u32 insn;
++
++	if (aarch64_insn_read((void *)regs->pc, &insn))
++		goto out_err;
++
++	if (try_emulate_el1_ssbs(regs, insn))
++		return;
++
++out_err:
++	die("Oops - Undefined instruction", regs, esr);
++}
++
++void do_el0_bti(struct pt_regs *regs)
+ {
+-	BUG_ON(!user_mode(regs));
+ 	force_signal_inject(SIGILL, ILL_ILLOPC, regs->pc, 0);
+ }
+-NOKPROBE_SYMBOL(do_bti);
+ 
+-void do_ptrauth_fault(struct pt_regs *regs, unsigned int esr)
++void do_el1_bti(struct pt_regs *regs, unsigned long esr)
++{
++	die("Oops - BTI", regs, esr);
++}
++
++void do_el0_fpac(struct pt_regs *regs, unsigned long esr)
++{
++	force_signal_inject(SIGILL, ILL_ILLOPN, regs->pc, esr);
++}
++
++void do_el1_fpac(struct pt_regs *regs, unsigned long esr)
+ {
+ 	/*
+-	 * Unexpected FPAC exception or pointer authentication failure in
+-	 * the kernel: kill the task before it does any more harm.
++	 * Unexpected FPAC exception in the kernel: kill the task before it
++	 * does any more harm.
+ 	 */
+-	BUG_ON(!user_mode(regs));
+-	force_signal_inject(SIGILL, ILL_ILLOPN, regs->pc, esr);
++	die("Oops - FPAC", regs, esr);
+ }
+-NOKPROBE_SYMBOL(do_ptrauth_fault);
+ 
+ #define __user_cache_maint(insn, address, res)			\
+ 	if (address >= user_addr_max()) {			\

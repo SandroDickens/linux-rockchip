@@ -1,0 +1,39 @@
+--- drivers/base/power/main.c
++++ drivers/base/power/main.c
+@@ -1909,21 +1926,23 @@ int dpm_prepare(pm_message_t state)
+ 		trace_device_pm_callback_end(dev, error);
+ 
+ 		mutex_lock(&dpm_list_mtx);
+-		if (error) {
+-			if (error == -EAGAIN) {
+-				put_device(dev);
+-				error = 0;
+-				continue;
+-			}
+-			pr_info("Device %s not prepared for power transition: code %d\n",
+-				dev_name(dev), error);
+-			put_device(dev);
+-			break;
++
++		if (!error) {
++			dev->power.is_prepared = true;
++			if (!list_empty(&dev->power.entry))
++				list_move_tail(&dev->power.entry, &dpm_prepared_list);
++		} else if (error == -EAGAIN) {
++			error = 0;
++		} else {
++			dev_info(dev, "not prepared for power transition: code %d\n",
++				 error);
+ 		}
+-		dev->power.is_prepared = true;
+-		if (!list_empty(&dev->power.entry))
+-			list_move_tail(&dev->power.entry, &dpm_prepared_list);
++
++		mutex_unlock(&dpm_list_mtx);
++
+ 		put_device(dev);
++
++		mutex_lock(&dpm_list_mtx);
+ 	}
+ 	mutex_unlock(&dpm_list_mtx);
+ 	trace_suspend_resume(TPS("dpm_prepare"), state.event, false);

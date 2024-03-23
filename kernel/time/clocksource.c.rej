@@ -1,0 +1,10 @@
+--- kernel/time/clocksource.c
++++ kernel/time/clocksource.c
+@@ -137,6 +138,7 @@ static void __clocksource_change_rating(struct clocksource *cs, int rating);
+  * Interval: 0.5sec.
+  */
+ #define WATCHDOG_INTERVAL (HZ >> 1)
++#define WATCHDOG_INTERVAL_MAX_NS ((2 * WATCHDOG_INTERVAL) * (NSEC_PER_SEC / HZ))
+ 
+ static void clocksource_watchdog_work(struct work_struct *work)
+ {

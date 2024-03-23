@@ -1,0 +1,12 @@
+--- fs/f2fs/gc.c
++++ fs/f2fs/gc.c
+@@ -1451,7 +1451,8 @@ static int gc_data_segment(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
+ 
+ 		if (phase == 3) {
+ 			inode = f2fs_iget(sb, dni.ino);
+-			if (IS_ERR(inode) || is_bad_inode(inode)) {
++			if (IS_ERR(inode) || is_bad_inode(inode) ||
++					special_file(inode->i_mode)) {
+ 				set_sbi_flag(sbi, SBI_NEED_FSCK);
+ 				continue;
+ 			}
